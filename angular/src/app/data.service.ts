@@ -13,4 +13,13 @@ export class DataService {
   public getWorkoutOptions(){
     return this.httpClient.get(this.REST_API_SERVER);
   }
+  public postWorkoutOptions(workoutSchema: string, workoutProgramType: string, servicerAccountIdentifier: number, loanIdentifier: number){
+    const body = {
+      "workoutSchema": workoutSchema,
+      "workoutProgramType": workoutProgramType,
+      "servicerAccountIdentifier": servicerAccountIdentifier,
+      "loanIdentifier": loanIdentifier
+    };
+    return this.httpClient.post<any>(this.REST_API_SERVER, body);
+  }
 }
