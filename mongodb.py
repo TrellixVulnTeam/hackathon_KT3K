@@ -7,13 +7,13 @@ def insertIntoDB():
     hackathon = client.hackathon
     workoutData = hackathon.workoutData
 
-    emp_rec1 = {
-            "name":"Mr.Geek",
-            "eid":25,
-            "location":"delhi"
-            }
-    workoutData.insert_one(emp_rec1)
+    postWorkoutJSON = open('postWorkoutData.json')
+    postWorkoutData = json.load(postWorkoutJSON)
+    
+    for i in postWorkoutData:
+      workoutData.insert_one(i)
 
+    postWorkoutJSON.close()
 
 companies = [{"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"},
               {"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"},
@@ -33,4 +33,5 @@ def get_companies():
   return json.dumps(companies)
 
 if __name__ == '__main__':
+    ##insertIntoDB()
     api.run() 
