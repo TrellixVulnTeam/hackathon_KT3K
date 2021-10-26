@@ -1,4 +1,12 @@
 <div *ngIf="selectedResult">
+  <mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+
   <mat-accordion>
     <mat-expansion-panel *ngFor="let workoutoption of selectedResult ; let index = index;">
       <mat-expansion-panel-header>
