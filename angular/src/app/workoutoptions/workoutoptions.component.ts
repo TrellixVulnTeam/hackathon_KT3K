@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import ChartsEmbedSDK from "@mongodb-js/charts-embed-dom"
+import { PageEvent } from '@angular/material/paginator';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-workoutoptions',
@@ -7,11 +8,29 @@ import ChartsEmbedSDK from "@mongodb-js/charts-embed-dom"
   styleUrls: ['./workoutoptions.component.css']
 })
 export class WorkoutoptionsComponent implements OnInit {
-  items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
-  expandedIndex = 0;
-  constructor() { }
+  
+  length: number;
+  selectedResult: any;
+  pageSize = 10;
+  pageEvent: PageEvent;
+  workoutoptions: any;
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
+    this.dataService.getWorkoutOptions().subscribe( (workoutoptions: any) => {
+      this.workoutoptions = workoutoptions;
+      this.length = this.workoutoptions.length;
+      this.selectedResult = this.workoutoptions.slice(0, this.pageSize);
+      console.log(workoutoptions);
+    })
+  }
+
+  getData( event?: PageEvent) {
+    if(event) {
+      this.selectedResult = this.workoutoptions.slice(event?.pageIndex * event?.pageSize, event?.pageIndex * event?.pageSize + event?.pageSize);
+    }
+    return event;
   }
 
 }

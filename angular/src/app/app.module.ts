@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { WorkoutoptionsComponent } from './workoutoptions/workoutoptions.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import {CdkAccordionModule} from '@angular/cdk/accordion';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {CdkAccordionModule} from '@angular/cdk/accordion';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatPaginatorModule,
-    CdkAccordionModule
+    MatExpansionModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

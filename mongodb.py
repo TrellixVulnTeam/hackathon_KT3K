@@ -15,7 +15,17 @@ def insertIntoDB():
     workoutData.insert_one(emp_rec1)
 
 
-companies = [{"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"}]
+companies = [{"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"},
+              {"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"},
+              {"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"},
+              {"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"},
+              {"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"},
+              {"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"},
+              {"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"},
+              {"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"},
+              {"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"},
+              {"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"},
+              {"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"}]
 api = Flask(__name__)
 
 @api.route('/workoutoptions', methods=['GET'])
@@ -23,5 +33,4 @@ def get_companies():
   return json.dumps(companies)
 
 if __name__ == '__main__':
-    insertIntoDB()
     api.run() 
