@@ -1,6 +1,5 @@
 from pymongo import MongoClient
-from flask import Flask, json
-from werkzeug.wrappers import request
+from flask import Flask, json, request
 from bson.json_util import dumps, loads
 
 def insertWorkoutDataIntoDB(): 
@@ -45,14 +44,20 @@ api = Flask(__name__)
 def get_companies():
   return json.dumps(companies)
 
-@api.route('/workoutoptions', methods=['GET'])
+@api.route('/workoutoptions', methods=['POST'])
 def get_workout():
   uri = "mongodb+srv://admin:admin@hackathon.uj373.mongodb.net/hackathon?retryWrites=true&w=majority"
   client = MongoClient(uri)
   hackathon = client.hackathon
   workoutData = hackathon.workoutData
 
-  query = {"workoutSchema" : "workoutoptions"}
+  _request = json.loads(request.data)
+
+  query = {"workoutSchema" : _request['workoutSchema'],
+    "workoutProgramType" : _request['workoutProgramType'],
+    "loanIdentifier" : _request['loanIdentifier'],
+    "servicerAccountIdentifier" : _request['servicerAccountIdentifier']
+  }
 
   document = workoutData.find(query)
   
