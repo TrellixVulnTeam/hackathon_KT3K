@@ -40,9 +40,20 @@ def cleanDB():
 companies = [{"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"}]
 api = Flask(__name__)
 
-@api.route('/test', methods=['GET'])
+@api.route('/workoutoptions', methods=['GET'])
 def get_companies():
-  return json.dumps(companies)
+  uri = "mongodb+srv://admin:admin@hackathon.uj373.mongodb.net/hackathon?retryWrites=true&w=majority"
+  client = MongoClient(uri)
+  hackathon = client.hackathon
+  workoutData = hackathon.workoutData
+
+  query = {"workoutSchema" : "workoutoptions"}
+  document = workoutData.find(query)
+  
+  list_current = list(document)
+  d = dumps(list_current)
+
+  return d
 
 @api.route('/workoutoptions', methods=['POST'])
 def get_workout():
