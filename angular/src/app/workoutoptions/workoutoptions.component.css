@@ -7,3 +7,12 @@ img {
   margin-right: 10px;
 }
 
+.leftTable {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+.rightTable {
+  width: 50%;
+  padding: 10px;
+}
