@@ -5,13 +5,15 @@
     <span class="example-spacer"></span>
   </mat-toolbar>
 
+  <h1>Account: {{ selectedResult[0].servicerAccountIdentifier }}</h1>
   <mat-accordion>
     <mat-expansion-panel *ngFor="let workoutoption of selectedResult ; let index = index;">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{ workoutoption.servicerAccountIdentifier }}
+          Loan Number: {{ workoutoption.loanIdentifier }}
         </mat-panel-title>
         <mat-panel-description>
+          {{ workoutoption.workoutProgramType }}
           {{ workoutoption.workoutReportingStatusType }}
         </mat-panel-description>
       </mat-expansion-panel-header>
