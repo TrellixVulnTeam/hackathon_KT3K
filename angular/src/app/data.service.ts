@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +13,20 @@ export class DataService {
   public getWorkoutOptions(){
     return this.httpClient.get(this.REST_API_SERVER);
   }
-  public postWorkoutOptions(workoutSchema: string, workoutProgramType: string, servicerAccountIdentifier: number, loanIdentifier: number){
+  public postWorkoutOptions(workoutSchema?: string, workoutProgramType?: string, servicerAccountIdentifier?: number, loanIdentifier?: number){
     const body = {
       "workoutSchema": workoutSchema,
       "workoutProgramType": workoutProgramType,
       "servicerAccountIdentifier": servicerAccountIdentifier,
       "loanIdentifier": loanIdentifier
     };
-    return this.httpClient.post<any>(this.REST_API_SERVER, body);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'my-auth-token'
+      })
+    };
+    return this.httpClient.post<any>(this.REST_API_SERVER, body, httpOptions);
   }
+  
 }

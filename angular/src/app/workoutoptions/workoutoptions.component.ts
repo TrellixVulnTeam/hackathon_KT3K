@@ -15,6 +15,10 @@ export class WorkoutoptionsComponent implements OnInit {
   pageSize = 10;
   pageEvent: PageEvent;
   workoutoptions: any;
+  selectedSchema = '';
+  selectedProgramType = '';
+  loanIdentifierField: number;
+  serviceLoanIdentifierField: number;
 
   displayedColumns: string[] = ['loanInterestRateAtModification', 'loanPrincipleAndInterestPaymentAmountAtModification', 
                                 'loanGrossUPBAmountAtModification', 'loanModificationMaturityTermCount'];
@@ -36,6 +40,18 @@ export class WorkoutoptionsComponent implements OnInit {
       this.selectedResult = this.workoutoptions.slice(event?.pageIndex * event?.pageSize, event?.pageIndex * event?.pageSize + event?.pageSize);
     }
     return event;
+  }
+
+  search() {
+    this.dataService.postWorkoutOptions(this.selectedSchema, this.selectedProgramType,
+                                        this.loanIdentifierField, this.serviceLoanIdentifierField)
+                                        .subscribe( (workoutoptions: any) => {
+      this.workoutoptions = workoutoptions;
+      this.length = this.workoutoptions.length;
+      this.selectedResult = this.workoutoptions.slice(0, this.pageSize);
+      console.log(workoutoptions);
+    })
+
   }
 
 }

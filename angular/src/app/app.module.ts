@@ -12,6 +12,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,11 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatTableModule,
     MatToolbarModule,
     MatIconModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

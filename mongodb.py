@@ -37,11 +37,10 @@ def cleanDB():
   hackathon.workoutData.drop()
   hackathon.loans.drop()
 
-companies = [{"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"}]
 api = Flask(__name__)
 
 @api.route('/workoutoptions', methods=['GET'])
-def get_companies():
+def getWorkout():
   uri = "mongodb+srv://admin:admin@hackathon.uj373.mongodb.net/hackathon?retryWrites=true&w=majority"
   client = MongoClient(uri)
   hackathon = client.hackathon
@@ -56,25 +55,24 @@ def get_companies():
   return d
 
 @api.route('/workoutoptions', methods=['POST'])
-def get_workout():
+def postWorkout():
   uri = "mongodb+srv://admin:admin@hackathon.uj373.mongodb.net/hackathon?retryWrites=true&w=majority"
   client = MongoClient(uri)
   hackathon = client.hackathon
   workoutData = hackathon.workoutData
+  query= {}
 
   _request = json.loads(request.data)
 
-  query = {"workoutSchema" : _request['workoutSchema'],
-    "workoutProgramType" : _request['workoutProgramType'],
-    "loanIdentifier" : _request['loanIdentifier'],
-    "servicerAccountIdentifier" : _request['servicerAccountIdentifier']
-  }
+  for key, value in _request.items():
+    if value:
+      query[key] = value
+    print(query)
 
   document = workoutData.find(query)
-  
   list_current = list(document)
   d = dumps(list_current)
-
+  
   return d
 
 if __name__ == '__main__':

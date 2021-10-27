@@ -1,10 +1,54 @@
+<mat-toolbar>
+  <img src="assets/icons/fm_icon.png">
+  <span>Workout Options Data Visualization</span>
+  <span class="example-spacer"></span>
+</mat-toolbar>
+<mat-toolbar class="filter-toolbar">
+  <div class="outerContainer">
+        <div fxLayout="row">
+          <div fxflex="30">
+            <mat-form-field appearance="fill">
+              <mat-label>Select schema</mat-label>
+              <mat-select [(value)]="selectedSchema">
+                <mat-option>None</mat-option>
+                <mat-option value="workoutoptions">Workout Options</mat-option>
+                <mat-option value="retention">Retention</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxflex="30">
+            <mat-form-field appearance="fill">
+              <mat-label>Select program type</mat-label>
+              <mat-select [(value)]="selectedProgramType">
+                <mat-option>None</mat-option>
+                <mat-option value="AVM">AVM</mat-option>
+                <mat-option value="PDM">PDM</mat-option>
+                <mat-option value="FLX">FLX</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxflex="30">
+              <mat-form-field class="example-full-width" appearance="fill" ngDefaultControl [(ngModel)]="loanIdentifierField">
+                <mat-label>Loan Identifier</mat-label>
+                <input matInput value="">
+              </mat-form-field>
+          </div>
+          <div fxflex="30">
+              <mat-form-field class="example-full-width" appearance="fill" ngDefaultControl [(ngModel)]="serviceLoanIdentifierField">
+                <mat-label>Service Identifier</mat-label>
+                <input matInput value="">
+              </mat-form-field>
+          </div>
+          <div fxflex="30">
+            <button mat-raised-button color="primary" (click)="search()">Search</button>
+          </div>
+          
+        </div>
+    </div>
+  
+  
+</mat-toolbar>
 <div *ngIf="selectedResult">
-  <mat-toolbar>
-    <img src="assets/icons/fm_icon.png">
-    <span>Workout Options Data Visualization</span>
-    <span class="example-spacer"></span>
-  </mat-toolbar>
-
   <mat-accordion>
     <mat-expansion-panel *ngFor="let workoutoption of selectedResult ; let index = index;">
       <mat-expansion-panel-header>

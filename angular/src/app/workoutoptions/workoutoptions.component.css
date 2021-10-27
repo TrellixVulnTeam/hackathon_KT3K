@@ -21,3 +21,7 @@ img {
 .mat-expansion-panel-header {
   width: 100%;
 }
+.filter-toolbar {
+  padding-top: 20px;
+  font-size: 12px;
+}
