@@ -53,9 +53,10 @@
     <mat-expansion-panel *ngFor="let workoutoption of selectedResult ; let index = index;">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{ workoutoption.servicerAccountIdentifier }}
+          Loan Number: {{ workoutoption.loanIdentifier }}
         </mat-panel-title>
         <mat-panel-description>
+          {{ workoutoption.workoutProgramType }}
           {{ workoutoption.workoutReportingStatusType }}
         </mat-panel-description>
       </mat-expansion-panel-header>
