@@ -1,6 +1,11 @@
 .mat-form-field + .mat-form-field {
   margin-left: 8px;
 }
+img {
+  height: inherit;
+  margin-right: 10px;
+}
+
 .leftTable {
   width: 100%;
 }
