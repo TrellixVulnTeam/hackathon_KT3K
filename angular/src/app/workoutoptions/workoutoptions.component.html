@@ -11,77 +11,84 @@
     <mat-expansion-panel *ngFor="let workoutoption of selectedResult ; let index = index;">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Name
+          {{ workoutoption.servicerAccountIdentifier }}
         </mat-panel-title>
         <mat-panel-description>
-          Id
+          {{ workoutoption.workoutReportingStatusType }}
         </mat-panel-description>
       </mat-expansion-panel-header>
-        <table mat-table [dataSource]="selectedResult" [className]="'leftTable'">
-
-          <!--- Note that these columns can be defined in any order.
-                The actual rendered columns are set as a property on the row definition" -->
-        
-          <!-- Position Column -->
-          <ng-container matColumnDef="position">
-            <th mat-header-cell *matHeaderCellDef> Loan Interest Rate </th>
-            <td mat-cell *matCellDef="let workoutoption"> {{workoutoption?.preWorkoutData?.currentLoanInterestRate}} </td>
-          </ng-container>
-        
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Loan Principle And Interest Payment Amount  </th>
-            <td mat-cell *matCellDef="let workoutoption"> {{workoutoption?.preWorkoutData?.currentPrincipalAndInterestPaymentAmount}} </td>
-          </ng-container>
-        
-          <!-- Weight Column -->
-          <ng-container matColumnDef="weight">
-            <th mat-header-cell *matHeaderCellDef> Loan Gross UPB Amount </th>
-            <td mat-cell *matCellDef="let workoutoption"> {{workoutoption?.preWorkoutData?.currentLoanGrossUPBAmount}} </td>
-          </ng-container>
-        
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="symbol">
-            <th mat-header-cell *matHeaderCellDef> Loan Remaining Maturity </th>
-            <td mat-cell *matCellDef="let workoutoption"> {{workoutoption?.preWorkoutData?.currentLoanRemainingMaturityTermMonthsCount}} </td>
-          </ng-container>
-        
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-        <div [className]="'padding'"></div>
-        <table mat-table [dataSource]="selectedResult" [className]="'rightTable'">
-
-          <!--- Note that these columns can be defined in any order.
-                The actual rendered columns are set as a property on the row definition" -->
-        
-          <!-- Position Column -->
-          <ng-container matColumnDef="position">
-            <th mat-header-cell *matHeaderCellDef> Loan Interest Rate </th>
-            <td mat-cell *matCellDef="let workoutoption"> {{workoutoption?.postWorkoutData?.loanInterestRateAtModification}} </td>
-          </ng-container>
-        
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Loan Principle And Interest Payment Amount </th>
-            <td mat-cell *matCellDef="let workoutoption"> {{workoutoption?.postWorkoutData?.loanPrincipleAndInterestPaymentAmountAtModification}} </td>
-          </ng-container>
-        
-          <!-- Weight Column -->
-          <ng-container matColumnDef="weight">
-            <th mat-header-cell *matHeaderCellDef> Loan Gross UPB Amount </th>
-            <td mat-cell *matCellDef="let workoutoption"> {{workoutoption?.postWorkoutData?.loanGrossUPBAmountAtModification}} </td>
-          </ng-container>
-        
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="symbol">
-            <th mat-header-cell *matHeaderCellDef> Loan Remaining Maturity </th>
-            <td mat-cell *matCellDef="let workoutoption"> {{workoutoption?.postWorkoutData?.loanModificationMaturityTermCount}} </td>
-          </ng-container>
-        
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+      
+      <div class="outerContainer">
+        <div fxLayout="row" >
+          <div fxflex="5" style="flex: 1 1 5%; box-sizing: border-box; max-width: 5%;"></div>
+          <div fxflex="40" class="leftTable">
+            <h3>Preworkout Data</h3>
+            <table mat-table [dataSource]="selectedResult" >
+    
+              <!-- Loan Interest Rate -->
+              <ng-container matColumnDef="loanInterestRateAtModification">
+                <th mat-header-cell *matHeaderCellDef> Loan Interest Rate </th>
+                <td mat-cell *matCellDef="let workoutoption"> {{workoutoption?.preWorkoutData?.currentLoanInterestRate}} </td>
+              </ng-container>
+            
+              <!-- Loan Principle And Interest Payment Amount -->
+              <ng-container matColumnDef="loanPrincipleAndInterestPaymentAmountAtModification">
+                <th mat-header-cell *matHeaderCellDef> Loan Principle And Interest Payment Amount </th>
+                <td mat-cell *matCellDef="let workoutoption"> {{workoutoption?.preWorkoutData?.currentPrincipalAndInterestPaymentAmount}} </td>
+              </ng-container>
+            
+              <!-- Loan Gross UPB Amount -->
+              <ng-container matColumnDef="loanGrossUPBAmountAtModification">
+                <th mat-header-cell *matHeaderCellDef> Loan Gross UPB Amount </th>
+                <td mat-cell *matCellDef="let workoutoption"> {{workoutoption?.preWorkoutData?.currentLoanGrossUPBAmount}} </td>
+              </ng-container>
+            
+              <!-- Loan Remaining Maturity -->
+              <ng-container matColumnDef="loanModificationMaturityTermCount">
+                <th mat-header-cell *matHeaderCellDef> Loan Remaining Maturity </th>
+                <td mat-cell *matCellDef="let workoutoption"> {{workoutoption?.preWorkoutData?.currentLoanRemainingMaturityTermMonthsCount}} </td>
+              </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+          <div fxflex="10" style="flex: 1 1 10%; box-sizing: border-box; max-width: 10%;"></div>
+          <div fxflex="40" class="rightTable">
+            <h3>Postworkout Data</h3>
+            <table mat-table [dataSource]="selectedResult" >
+    
+              <!-- Loan Interest Rate -->
+              <ng-container matColumnDef="loanInterestRateAtModification">
+                <th mat-header-cell *matHeaderCellDef> Loan Interest Rate </th>
+                <td mat-cell *matCellDef="let workoutoption"> {{workoutoption?.postWorkoutData?.loanInterestRateAtModification}} </td>
+              </ng-container>
+            
+              <!--Loan Principle And Interest Payment Amount -->
+              <ng-container matColumnDef="loanPrincipleAndInterestPaymentAmountAtModification">
+                <th mat-header-cell *matHeaderCellDef> Loan Principle And Interest Payment Amount </th>
+                <td mat-cell *matCellDef="let workoutoption"> {{workoutoption?.postWorkoutData?.loanPrincipleAndInterestPaymentAmountAtModification}} </td>
+              </ng-container>
+            
+              <!-- Loan Gross UPB Amount -->
+              <ng-container matColumnDef="loanGrossUPBAmountAtModification">
+                <th mat-header-cell *matHeaderCellDef> Loan Gross UPB Amount </th>
+                <td mat-cell *matCellDef="let workoutoption"> {{workoutoption?.postWorkoutData?.loanGrossUPBAmountAtModification}} </td>
+              </ng-container>
+            
+              <!-- Loan Remaining Maturity -->
+              <ng-container matColumnDef="loanModificationMaturityTermCount">
+                <th mat-header-cell *matHeaderCellDef> Loan Remaining Maturity </th>
+                <td mat-cell *matCellDef="let workoutoption"> {{workoutoption?.postWorkoutData?.loanModificationMaturityTermCount}} </td>
+              </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+          <div fxflex="5" style="flex: 1 1 5%; box-sizing: border-box; max-width: 5%;"></div>
+        </div>
+      </div>
 
     </mat-expansion-panel>
   </mat-accordion>
