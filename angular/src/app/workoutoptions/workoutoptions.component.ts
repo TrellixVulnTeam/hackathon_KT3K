@@ -31,7 +31,6 @@ export class WorkoutoptionsComponent implements OnInit {
       this.workoutoptions = workoutoptions;
       this.length = this.workoutoptions.length;
       this.selectedResult = this.workoutoptions.slice(0, this.pageSize);
-      console.log(workoutoptions);
     })
   }
 
@@ -43,14 +42,21 @@ export class WorkoutoptionsComponent implements OnInit {
   }
 
   search() {
-    this.dataService.postWorkoutOptions(this.selectedSchema, this.selectedProgramType,
-                                        this.loanIdentifierField, this.serviceLoanIdentifierField)
-                                        .subscribe( (workoutoptions: any) => {
-      this.workoutoptions = workoutoptions;
-      this.length = this.workoutoptions.length;
-      this.selectedResult = this.workoutoptions.slice(0, this.pageSize);
-      console.log(workoutoptions);
-    })
+    if(!this.selectedProgramType && !this.selectedSchema && !this.loanIdentifierField && !this.serviceLoanIdentifierField) {
+      this.dataService.getWorkoutOptions().subscribe( (workoutoptions: any) => {
+        this.workoutoptions = workoutoptions;
+        this.length = this.workoutoptions.length;
+        this.selectedResult = this.workoutoptions.slice(0, this.pageSize);
+      })
+    } else {
+      this.dataService.postWorkoutOptions(this.selectedSchema, this.selectedProgramType,
+        this.serviceLoanIdentifierField ? this.serviceLoanIdentifierField : null, this.loanIdentifierField ? this.loanIdentifierField : null)
+        .subscribe( (workoutoptions: any) => {
+          this.workoutoptions = workoutoptions;
+          this.length = this.workoutoptions.length;
+          this.selectedResult = this.workoutoptions.slice(0, this.pageSize);
+        })
+    } 
 
   }
 

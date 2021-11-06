@@ -41,39 +41,49 @@ api = Flask(__name__)
 
 @api.route('/workoutoptions', methods=['GET'])
 def getWorkout():
-  uri = "mongodb+srv://admin:admin@hackathon.uj373.mongodb.net/hackathon?retryWrites=true&w=majority"
-  client = MongoClient(uri)
-  hackathon = client.hackathon
-  workoutData = hackathon.workoutData
+  file = open('postWorkoutData.json')
+  jsonObject = json.load(file)
+  # print(jsonObject)
+  # file.close()
 
-  query = {"workoutSchema" : "workoutoptions"}
-  document = workoutData.find(query)
-  
-  list_current = list(document)
-  d = dumps(list_current)
-
-  return d
+  return json.dumps(jsonObject)
 
 @api.route('/workoutoptions', methods=['POST'])
 def postWorkout():
-  uri = "mongodb+srv://admin:admin@hackathon.uj373.mongodb.net/hackathon?retryWrites=true&w=majority"
-  client = MongoClient(uri)
-  hackathon = client.hackathon
-  workoutData = hackathon.workoutData
-  query= {}
+  # uri = "mongodb+srv://admin:admin@hackathon.uj373.mongodb.net/hackathon?retryWrites=true&w=majority"
+  # client = MongoClient(uri)
+  # hackathon = client.hackathon
+  # workoutData = hackathon.workoutData
+  # query= {}
 
-  _request = json.loads(request.data)
+  # _request = json.loads(request.data)
 
-  for key, value in _request.items():
-    if value:
-      query[key] = value
-    print(query)
+  # for key, value in _request.items():
+  #   if value:
+  #     query[key] = value
+  #   print(query)
 
-  document = workoutData.find(query)
-  list_current = list(document)
-  d = dumps(list_current)
+  # document = workoutData.find(query)
+  # list_current = list(document)
+  # d = dumps(list_current)
   
-  return d
+  # return d
+  filterRequest = json.loads(request.data)
+  print(filterRequest)
+
+  file = open('postWorkoutData.json')
+  workouts = json.load(file)
+  file.close()
+  filteredData = []
+  for workout in workouts:
+    if(str(workout["loanIdentifier"]) == filterRequest["loanIdentifier"]
+      or str(workout["servicerAccountIdentifier"]) == filterRequest["servicerAccountIdentifier"]
+      or str(workout["workoutSchema"]) == filterRequest["workoutSchema"]
+      or str(workout["workoutProgramType"]) == filterRequest["workoutProgramType"]
+      ):
+      filteredData.insert(0, workout)
+
+  return json.dumps(filteredData)
 
 if __name__ == '__main__':
     ##cleanDB()
